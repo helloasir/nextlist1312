@@ -1,9 +1,9 @@
-import fs from 'fs';
-import path from 'path';
-import Link from 'next/link';
+import fs from "fs";
+import path from "path";
+import Link from "next/link";
 
 export async function getStaticPaths() {
-  const totalPages = 10; // Adjust based on your data
+  const totalPages = 1000; // Adjust based on your data
   const paths = Array.from({ length: totalPages }, (_, i) => ({
     params: { pageNumber: (i + 1).toString() },
   }));
@@ -11,9 +11,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const pageNumber = parseInt(params.pageNumber);
-  const filePath = path.join(process.cwd(), `public/data/webs_${pageNumber}.json`);
-  const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  const pageNumber = parseInt(params.pageNumber, 10);
+  const filePath = path.join(process.cwd(), `public/data/web10000_${pageNumber}.json`);
+  const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
   return { props: { data } };
 }
 
